@@ -8,7 +8,6 @@ Deck file with every card
 */
 public class PokerHelp{
 	ArrayList<Card> deck;
-	ArrayList<Card> leftoverDeck;
 	Hand hand;
 
 	public static void main(String[] args){
@@ -18,6 +17,9 @@ public class PokerHelp{
 		}
 		Hand hand = new Hand(informationRetriever());
 		hand.toString();
+		for (int i = 0; i < hand.all.length; i++){
+			deck.remove(hand.all.get(i));
+		}
 		calculator(hand);
 	}
 
@@ -41,7 +43,27 @@ public class PokerHelp{
 		return cards;
 	}
 
-	public static void calculator(ArrayList<Card> hand){
-
+	public static void calculator(Hand hand){
+		int handsBeaten = 0;
+		int totalHands = 0;
+		ArrayList<Card> communityCards = new ArrayList<Card>;
+		for (int i = 2; i < 7; i++){
+			communityCards.add(hand.all.get(i));
+		}
+		for (int i = 0; i < deck.length; i++){
+			for (int j = i + 1; j < deck.length; j++){
+				ArrayList<Card> temp = communityCards;
+				temp.add(deck.get(i));
+				temp.add(deck.get(j));
+				Hand opponentsHand = new Hand(temp);
+				totalHands++;
+				if (hand.bestHand > opponentsHand.bestHand){
+					handsBeaten++;
+				}
+			}
+		}
+		double winPercentage = handsBeaten*100/totalHands;
+		System.out.println("Your hand beats " + handsBeaten + " out of " + totalHands + " total hands.");
+		System.out.println("Thats a win-percentage of " + winPercentage + "%.");
 	}
 }
