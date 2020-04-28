@@ -1,10 +1,8 @@
 import java.util.*;
 import java.io.*;
 /*TODO
-calculator method
-information retriever invalid input catches
 PokerHelpwithFolds class that extends PokerHelp, accounts for cards folded
-Deck file with every card
+
 */
 public class PokerHelp{
 	ArrayList<Card> deck;
