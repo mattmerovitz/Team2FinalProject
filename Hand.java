@@ -20,23 +20,7 @@ public class Hand{
 		for (int i=0; i<values.length; i++){
 			values[i] = currentHand.get(i);
 		}
-		for (int i = 0; i < values.length; i++) {
-				Card mini = values[i];
-        int min = values[i].getNum();
-        int minIndex = i;
-        for (int j = i+1; j < values.length; j++) {
-            if (values[j].num < min) {
-                mini = values[j];
-                minIndex = j;
-            }
-        }
-        Card temporary = values[i];
-        values[i] = mini;
-        values[minIndex] = temporary;
-    }
-		for (int i=0; i<values.length; i++) {
-			sortedCard.add(values[i]);
-		}
+		sortedCard = sort(values);
 		for (int i=1;i<sortedCard.size(); i+=2){
 			if (sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 2;
@@ -152,5 +136,23 @@ public class Hand{
 			return("You have a royal flush!");
 		}
 		return "";
+	}
+
+	public ArrayList<Card> sort(Card[] values){
+		ArrayList<Card> sortedCard = new ArrayList<Card>();
+		Card temporary = values[0];
+		for (int i = 1; i < 7; i++) {
+      for (int j = i; j > 0; j--) {
+        if (values[j].num < values[j-1].num) {
+					temporary = values[j];
+          values[j] = values[j-1];
+					values[j-1] = temporary;
+        }
+      }
+    }
+		for (int i=0; i<7; i++) {
+			sortedCard.add(values[i]);
+		}
+		return sortedCard;
 	}
 }
