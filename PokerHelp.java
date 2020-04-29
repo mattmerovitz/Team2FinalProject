@@ -2,16 +2,15 @@ import java.util.*;
 import java.io.*;
 /*TODO
 PokerHelpwithFolds class that extends PokerHelp, accounts for cards folded
-
 */
 public class PokerHelp{
 	ArrayList<Card> deck;
 	Hand hand;
 
-	public static void main(String[] args) throws FileNotFoundException{
-		Scanner filereader = new Scanner(new File ("Deck"));
+	public void main(String[] args) throws FileNotFoundException{
+		Scanner filereader = new Scanner(new File ("Deck.txt"));
 		while (filereader.hasNextLine()){
-			deck.add(Card(filereader.next(),filereader.next()));
+			deck.add(new Card(filereader.next(),filereader.next()));
 		}
 		Hand hand = new Hand(informationRetriever());
 		hand.toString();
@@ -21,7 +20,7 @@ public class PokerHelp{
 		calculator(hand);
 	}
 
-	public static ArrayList<Card> informationRetriever(){
+	public ArrayList<Card> informationRetriever(){
 		ArrayList<Card> cards = new ArrayList<Card>();
 		System.out.println("Welcome to our poker win percentage calculator!");
 		System.out.println("Please input all cards as 'suit' 'value' (Examples: Ace of spades ~ spade a, Six of hearts ~ heart 6, Queen of diamonds ~ diamond q");
@@ -43,44 +42,51 @@ public class PokerHelp{
 		return cards;
 	}
 
-	public static Card validateInput(Scanner input){
-		while (true){
-			String suit = input.next().toLowerCase();
-			if (suit.equals("spade") || suit.equals("diamond") || suit.equals("heart") || suit.equals("club")){
-				break;
-			}
-			System.out.println("Invalid suit input, please try again");
-		}
+	public Card validateInput(Scanner input){
 		while (true){
 			try{
-				Int num = input.nextInt();
-				if (num > 1 && num < 11){
-					break;
-				}
+				String suit = input.next().toLowerCase();
+			}
+			catch (InputMismatchException e){
+  				System.out.println("Invalid input, please try again: ");
 			}
 			try{
 				String num = input.next();
-				if (num.equals("j") || num.equals("q") || num.equals("k") || num.equals("a")){
-					break;
+				try{
+					int intNum = Integer.parseInt(num.trim());
+					if (intNum > 1 && intNum < 11){
+						if (suit.equals("spade") || suit.equals("diamond") || suit.equals("heart") || suit.equals("club")){
+							Card card = new Card(suit,intNum);
+							return card;
+						}
+						else{
+							System.out.println("Invalid input, please try again: ");
+						}
+					}
+					else{
+						System.out.println("Invalid input, please try again: ");
+					}
+				}
+				catch (NumberFormatException nfe){
+					Card card = new Card(suit,num);
+					return card;
 				}
 			}
-			catch (NoSuchElementException){
-			System.out.println("Invalid value input, please try again");
+			catch (InputMismatchException e){
+  				System.out.println("Invalid input, please try again: ");
+			}
 		}
-		}
-		Card card = new Card(suit,num);
-		return card;
 	}
 
-	public static void calculator(Hand hand){
+	public void calculator(Hand hand){
 		int handsBeaten = 0;
 		int totalHands = 0;
 		ArrayList<Card> communityCards = new ArrayList<Card>();
 		for (int i = 2; i < 7; i++){
 			communityCards.add(hand.all.get(i));
 		}
-		for (int i = 0; i < deck.length; i++){
-			for (int j = i + 1; j < deck.length; j++){
+		for (int i = 0; i < deck.size(); i++){
+			for (int j = i + 1; j < deck.size(); j++){
 				ArrayList<Card> temp = communityCards;
 				temp.add(deck.get(i));
 				temp.add(deck.get(j));

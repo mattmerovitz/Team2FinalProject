@@ -1,8 +1,11 @@
+import java.util.*;
+import java.io.*;
+
 public class Card{
-	Int num;
+	int num;
 	String suit;
 
-	public Card(String suit, Int num){
+	public Card(String suit, int num){
 		this.suit = suit;
 		this.num = num;
 	}
