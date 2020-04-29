@@ -61,8 +61,8 @@ public class PokerHelp{
 					handsBeaten++;
 				}
 			}
-	  }
-    double winPercentage = handsBeaten*100/totalHands;
+	  	}
+   		double winPercentage = handsBeaten*100/totalHands;
 		System.out.println("Your hand beats " + handsBeaten + " out of " + totalHands + " total hands.");
 		System.out.println("Thats a win-percentage of " + winPercentage + "%.");
    }
