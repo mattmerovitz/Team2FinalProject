@@ -16,24 +16,25 @@ public class Hand{
 		boolean straight_flush = false;
 		boolean twopair = false;
 		ArrayList<Card> sortedCard = new ArrayList<Card>();
-		Card[] values = new Card[currentHand.size];
+		Card[] values = new Card[currentHand.size()];
 		for (int i = 0; i < values.length; i++) {
+				Card mini = values[i]
         int min = values[i].num;
         int minIndex = i;
         for (int j = i+1; j < values.length; j++) {
             if (values[j].num < min) {
-                min = values[j];
+                mini = values[j];
                 minIndex = j;
             }
         }
-        int temporary = values[i];
-        values[i] = min;
+        Card temporary = values[i];
+        values[i] = mini;
         values[minIndex] = temporary;
     }
-		for (Card c : values) {
+		for (int i=0; i<values.length; i++) {
 			sortedCard.add(values[i]);
 		}
-		for (int i=1;i<sortedCard.size; i+=2){
+		for (int i=1;i<sortedCard.size(); i+=2){
 			if (sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 2;
 				pairCounter++;
@@ -43,7 +44,7 @@ public class Hand{
 				}
 			}
 		}
-		for (int i=2;i<sortedCard.size; i++){
+		for (int i=2;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 4;
 				if (twopair){
@@ -51,7 +52,7 @@ public class Hand{
 				}
 			}
 		}
-		for (int i=3;i<sortedCard.size; i++){
+		for (int i=3;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-3).num == sortedCard.get(i-2).num &&
 			sortedCard.get(i-2).num == sortedCard.get(i-1).num &&
 			sortedCard.get(i-1).num == sortedCard.get(i).num){
@@ -59,7 +60,7 @@ public class Hand{
 			}
 		}
 
-		for (int i=4;i<sortedCard.size; i++){
+		for (int i=4;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-4).num + 4 == sortedCard.get(i-3).num + 3 &&
 					sortedCard.get(i-3).num + 3 == sortedCard.get(i-2).num + 2 &&
 					sortedCard.get(i-2).num + 2 == sortedCard.get(i-1).num + 1 &&
@@ -86,15 +87,15 @@ public class Hand{
 		ArrayList<Card> diamondCards = new ArrayList<Card>();
 		ArrayList<Card> heartCards = new ArrayList<Card>();
 		ArrayList<Card> spadeCards = new ArrayList<Card>();
-		for (Card c : sortedCards) {
-      if (c.getSuit() == "club")
-      	clubCards.add(c);
-      else if (c.getSuit() == "diamond")
-      	diamondCards.add(c);
-      else if (c.getSuit() == "heart")
-      	heartCards.add(c);
-      else if (c.getSuit() == "spade")
-      	spadeCards.add(c);
+		for (int i=0; i<sortedCard.size(); i++) {
+      if (sortedCard.get(i).suit == "club")
+      	clubCards.add(sortedCard.get(i));
+      else if (sortedCard.get(i).suit == "diamond")
+      	diamondCards.add(sortedCard.get(i));
+      else if (sortedCard.get(i).suit == "heart")
+      	heartCards.add(sortedCard.get(i));
+      else if (sortedCard.get(i).suit == "spade")
+      	spadeCards.add(sortedCard.get(i));
         }
 
 		int numberCards = currentHand.size();
