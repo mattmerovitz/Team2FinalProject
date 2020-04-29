@@ -15,11 +15,19 @@ public class Hand{
 		int pairCounter = 0;
 		int royalChecker = 0;
 		ArrayList<Card> sortedCard = new ArrayList<Card>();
+		ArrayList<Card> straight = new ArrayList<Card>();
+		ArrayList<Card> heart = new ArrayList<Card>();
+		ArrayList<Card> club = new ArrayList<Card>();
+		ArrayList<Card> diamond = new ArrayList<Card>();
+		ArrayList<Card> spade = new ArrayList<Card>();
 		Card[] values = new Card[currentHand.size()];
 		for (int i=0; i<values.length; i++){
 			values[i] = currentHand.get(i);
 		}
 		sortedCard = sort(values);
+		for (int i=0; i<sortedCard.size(); i++){
+			straight.add(sortedCard.get(i));
+		}
 		for (int i=2;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 4;
@@ -56,37 +64,85 @@ public class Hand{
 			}
 		}
 
-		for (int i=4;i<sortedCard.size(); i++){
-			if (sortedCard.get(i-4).num + 4 == sortedCard.get(i-3).num + 3 &&
-					sortedCard.get(i-3).num + 3 == sortedCard.get(i-2).num + 2 &&
-					sortedCard.get(i-2).num + 2 == sortedCard.get(i-1).num + 1 &&
-					sortedCard.get(i-1).num + 1 == sortedCard.get(i).num) {
+		for (int i=1;i<straight.size(); i++){
+			if (straight.get(i-1).num == straight.get(i).num){
+				straight.remove(i);
+			}
+		}
+
+		for (int i=0;i<sortedCard.size(); i++){
+			if (sortedCard.get(i).suit.equals("heart")){
+				heart.add(sortedCard.get(i));
+			}
+			else if (sortedCard.get(i).suit.equals("club")){
+				club.add(sortedCard.get(i));
+			}
+			else if (sortedCard.get(i).suit.equals("diamond")){
+				diamond.add(sortedCard.get(i));
+			}
+			else if (sortedCard.get(i).suit.equals("spade")){
+				spade.add(sortedCard.get(i));
+			}
+		}
+
+		for (int i=4;i<straight.size(); i++){
+			if (straight.get(i-4).num + 4 == straight.get(i-3).num + 3 &&
+					straight.get(i-3).num + 3 == straight.get(i-2).num + 2 &&
+					straight.get(i-2).num + 2 == straight.get(i-1).num + 1 &&
+					straight.get(i-1).num + 1 == straight.get(i).num) {
 				bestHand = 5;
 			}
 		}
 
-		for (int i=4;i<sortedCard.size(); i++){
-			if (sortedCard.get(i-4).suit.equals(sortedCard.get(i-3).suit) &&
-					sortedCard.get(i-3).suit.equals(sortedCard.get(i-2).suit) &&
-					sortedCard.get(i-2).suit.equals(sortedCard.get(i-1).suit) &&
-					sortedCard.get(i-1).suit.equals(sortedCard.get(i).suit)) {
-				bestHand = 6;
-			}
+		if (heart.size() > 4 || club.size() > 4 || diamond.size() > 4 || spade.size() > 4){
+			bestHand = 6;
 		}
 
-		for (int i=4;i<sortedCard.size(); i++){
-			if (sortedCard.get(i-4).num + 4 == sortedCard.get(i-3).num + 3 &&
-					sortedCard.get(i-3).num + 3 == sortedCard.get(i-2).num + 2 &&
-					sortedCard.get(i-2).num + 2 == sortedCard.get(i-1).num + 1 &&
-					sortedCard.get(i-1).num + 1 == sortedCard.get(i).num &&
-					sortedCard.get(i-4).suit.equals(sortedCard.get(i-3).suit) &&
-					sortedCard.get(i-3).suit.equals(sortedCard.get(i-2).suit) &&
-					sortedCard.get(i-2).suit.equals(sortedCard.get(i-1).suit) &&
-					sortedCard.get(i-1).suit.equals(sortedCard.get(i).suit)) {
-				bestHand = 9;
-				royalChecker = sortedCard.get(i).num;
+		if (heart.size() > 4) {
+			for (int i=4;i<heart.size(); i++){
+				if (heart.get(i-4).num + 4 == heart.get(i-3).num + 3 &&
+					heart.get(i-3).num + 3 == heart.get(i-2).num + 2 &&
+					heart.get(i-2).num + 2 == heart.get(i-1).num + 1 &&
+					heart.get(i-1).num + 1 == heart.get(i).num){
+						bestHand = 9;
+						royalChecker = heart.get(i).num;
+					}
+				}
 			}
-		}
+		else if (club.size() > 4) {
+			for (int i=4;i<club.size(); i++){
+				if (club.get(i-4).num + 4 == club.get(i-3).num + 3 &&
+					club.get(i-3).num + 3 == club.get(i-2).num + 2 &&
+					club.get(i-2).num + 2 == club.get(i-1).num + 1 &&
+					club.get(i-1).num + 1 == club.get(i).num){
+						bestHand = 9;
+						royalChecker = club.get(i).num;
+					}
+				}
+			}
+		else if (diamond.size() > 4) {
+			for (int i=4;i<diamond.size(); i++){
+				if (diamond.get(i-4).num + 4 == diamond.get(i-3).num + 3 &&
+					diamond.get(i-3).num + 3 == diamond.get(i-2).num + 2 &&
+					diamond.get(i-2).num + 2 == diamond.get(i-1).num + 1 &&
+					diamond.get(i-1).num + 1 == diamond.get(i).num){
+						bestHand = 9;
+						royalChecker = diamond.get(i).num;
+					}
+				}
+			}
+		else if (spade.size() > 4){
+			for (int i=4;i<spade.size(); i++){
+				if (spade.get(i-4).num + 4 == spade.get(i-3).num + 3 &&
+					spade.get(i-3).num + 3 == spade.get(i-2).num + 2 &&
+					spade.get(i-2).num + 2 == spade.get(i-1).num + 1 &&
+					spade.get(i-1).num + 1 == spade.get(i).num){
+						bestHand = 9;
+						royalChecker = spade.get(i).num;
+					}
+				}
+			}
+
 
 		if (royalChecker == 14){
 			bestHand = 10;
