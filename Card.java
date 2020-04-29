@@ -21,4 +21,8 @@ public class Card{
 			this.num = 14;
 		}
 	}
+
+	public String getSuit(){
+		return this.suit;
+	}
 }
