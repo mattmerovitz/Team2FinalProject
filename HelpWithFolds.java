@@ -20,7 +20,7 @@ public class HelpWithFolds extends PokerHelp {
 
         counter++;
 
-        Card foldedCard = super.validateInput(fold)
+        Card foldedCard = super.validateInput(fold);
 
         for (Card i : deck) {
           if (deck[i] == foldedCard){
