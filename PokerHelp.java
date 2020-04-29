@@ -38,8 +38,12 @@ public class PokerHelp{
 		cards.add(validateInput(input));
   	Hand hand = new Hand(cards);
 		System.out.println(hand.toString());
-		for (int i = 0; i < hand.all.size(); i++){
-			deck.remove(hand.all.get(i));
+		for (int j = 0; j < hand.all.size(); j++){
+			for (int i = 0; i < deck.size(); i++) {
+				if (deck.get(i).num == hand.all.get(j).num && deck.get(i).suit.equals(hand.all.get(j).suit)){
+			 		deck.remove(i);
+		 		}
+	 		}
 		}
     double handsBeaten = 0;
 		double totalHands = 0;
