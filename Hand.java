@@ -34,9 +34,6 @@ public class Hand{
         values[i] = mini;
         values[minIndex] = temporary;
     }
-		for (int i=0; i<7; i++){
-			System.out.println(values[i].getNum());
-		}
 		for (int i=0; i<values.length; i++) {
 			sortedCard.add(values[i]);
 		}
