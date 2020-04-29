@@ -14,32 +14,41 @@ public class Hand{
 		bestHand = 1;
 		int pairCounter = 0;
 		boolean straight_flush = false;
-		boolean twopair = false;
+		boolean multpair = false;
 		ArrayList<Card> sortedCard = new ArrayList<Card>();
 		Card[] values = new Card[currentHand.size()];
 		for (int i=0; i<values.length; i++){
 			values[i] = currentHand.get(i);
 		}
 		sortedCard = sort(values);
-		for (int i=1;i<sortedCard.size(); i+=2){
-			if (sortedCard.get(i-1).num == sortedCard.get(i).num){
-				bestHand = 2;
-				pairCounter++;
-				if (pairCounter > 1){
-					bestHand = 3;
-					twopair = true;
-				}
-			}
-		}
-		System.out.println(pairCounter);
 		for (int i=2;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 4;
-				if (twopair){
-					bestHand = 7;
+			}
+		}
+		if (bestHand == 4){
+			for (int i=1;i<sortedCard.size(); i++){
+				if (sortedCard.get(i-1).num == sortedCard.get(i).num){
+					pairCounter++;
+					if (pairCounter > 2){
+						bestHand = 7;
+					}
 				}
 			}
 		}
+		pairCounter = 0;
+		for (int i=1;i<sortedCard.size(); i++){
+			if (sortedCard.get(i-1).num == sortedCard.get(i).num && bestHand == 1){
+				pairCounter++;
+				if (pairCounter > 1){
+					bestHand = 3;
+				}
+			}
+		}
+		if (pairCounter == 1){
+			bestHand = 2;
+		}
+
 		for (int i=3;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-3).num == sortedCard.get(i-2).num &&
 			sortedCard.get(i-2).num == sortedCard.get(i-1).num &&

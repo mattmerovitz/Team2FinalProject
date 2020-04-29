@@ -55,7 +55,6 @@ public class PokerHelp{
 				temp.add(deck.get(j));
 				Hand opponentsHand = new Hand(temp);
 				totalHands++;
-				System.out.println(opponentsHand.bestHand);
 				if (hand.bestHand > opponentsHand.bestHand){
 					handsBeaten++;
 				}
