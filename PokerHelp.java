@@ -33,6 +33,8 @@ public class PokerHelp{
 		System.out.println("Community Card 4 (Turn): ");
 		cards.add(validateInput(input));
 		System.out.println("Community Card 5 (River): ");
+		HelpWithFolds help = new HelpWithFolds();
+		deck = help.HelpWithFolds(deck);
 		cards.add(validateInput(input));
   		Hand hand = new Hand(cards);
 		System.out.println(hand.toString());
