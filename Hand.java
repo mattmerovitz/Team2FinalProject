@@ -97,7 +97,7 @@ public class Hand{
       	spadeCards.add(c);
         }
 
-		int numberCards = currentHand.length;
+		int numberCards = currentHand.size();
 
 		if (numberCards > 5) {
 			if (clubCards.size() >= 5){
