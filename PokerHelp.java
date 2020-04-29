@@ -2,14 +2,13 @@ import java.util.*;
 import java.io.*;
 /*TODO
 PokerHelpwithFolds class that extends PokerHelp, accounts for cards folded
-
 */
 public class PokerHelp{
 	ArrayList<Card> deck;
 	Hand hand;
 
 	public static void main(String[] args) throws fileNotFoundException{
-		Scanner filereader = new Scanner(new File "Deck");
+		Scanner filereader = new Scanner(File "Deck.txt");
 		while (filereader.hasNextLine()){
 			deck.add(Card(filereader.next(),filereader.next()));
 		}
@@ -45,26 +44,29 @@ public class PokerHelp{
 
 	public static Card validateInput(Scanner input){
 		while (true){
-			String suit = input.next().toLowerCase();
-			if (suit.equals("spade") || suit.equals("diamond") || suit.equals("heart") || suit.equals("club")){
-				break;
+			try{
+				String suit = input.next().toLowerCase();
+				if (suit.equals("spade") || suit.equals("diamond") || suit.equals("heart") || suit.equals("club")){
+					break;
+				}
 			}
-			System.out.println("Invalid suit input, please try again");
-		}
+			catch (InputMismatchException e){
+  				System.out.println("Invalid suit input, please try again: ");
+			}
 		while (true){
 			try{
-				Int num = input.nextInt();
-				if (num > 1 && num < 11){
-					break;
-				}
-			}
-			try{
 				String num = input.next();
-				if (num.equals("j") || num.equals("q") || num.equals("k") || num.equals("a")){
+				try{
+					int num = Integer.parseInt(s.trim());
+					break;
+				}
+				catch (NumberFormatException nfe){
 					break;
 				}
 			}
-			System.out.println("Invalid value input, please try again")
+			catch (InputMismatchException e){
+  				System.out.println("Invalid suit input, please try again: ");
+			}
 		}
 		Card card = new Card(suit,num);
 		return card;
