@@ -116,6 +116,8 @@ public class Hand{
 
 		}
 
+		return bestHand;
+
 	}
 	public String toString(){
 		if (bestHand == 1){
