@@ -28,4 +28,8 @@ public class Card{
 	public String getSuit(){
 		return this.suit;
 	}
+
+	public int getNum(){
+		return this.num;
+	}
 }

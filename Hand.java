@@ -17,9 +17,12 @@ public class Hand{
 		boolean twopair = false;
 		ArrayList<Card> sortedCard = new ArrayList<Card>();
 		Card[] values = new Card[currentHand.size()];
+		for (int i=0; i<values.length; i++){
+			values[i] = currentHand.get(i);
+		}
 		for (int i = 0; i < values.length; i++) {
 				Card mini = values[i];
-        int min = values[i].num;
+        int min = values[i].getNum();
         int minIndex = i;
         for (int j = i+1; j < values.length; j++) {
             if (values[j].num < min) {
@@ -31,6 +34,9 @@ public class Hand{
         values[i] = mini;
         values[minIndex] = temporary;
     }
+		for (int i=0; i<7; i++){
+			System.out.println(values[i].getNum());
+		}
 		for (int i=0; i<values.length; i++) {
 			sortedCard.add(values[i]);
 		}
@@ -66,10 +72,8 @@ public class Hand{
 					sortedCard.get(i-2).num + 2 == sortedCard.get(i-1).num + 1 &&
 					sortedCard.get(i-1).num + 1 == sortedCard.get(i).num) {
 				bestHand = 5;
-				if (sortedCard.get(i-4).num + 4 == sortedCard.get(i-3).num + 3 &&
-						sortedCard.get(i-3).num + 3 == sortedCard.get(i-2).num + 2 &&
-						sortedCard.get(i-2).num + 2 == sortedCard.get(i-1).num + 1 &&
-						sortedCard.get(i-1).num + 1 == sortedCard.get(i).num &&
+				boolean straight = true;
+				if (straight &&
 						sortedCard.get(i-4).suit == sortedCard.get(i-3).suit &&
 						sortedCard.get(i-3).suit == sortedCard.get(i-2).suit &&
 						sortedCard.get(i-2).suit == sortedCard.get(i-1).suit &&
@@ -133,7 +137,7 @@ public class Hand{
 			return("You have a three of a kind!");
 		}
 		else if (bestHand == 5){
-			return("You have a striaght!");
+			return("You have a straight!");
 		}
 		else if (bestHand == 6){
 			return("You have a flush!");
@@ -145,7 +149,7 @@ public class Hand{
 			return("You have a four of a kind!");
 		}
 		else if (bestHand == 9){
-			return("You have a striaght flush!");
+			return("You have a straight flush!");
 		}
 		else if (bestHand == 10){
 			return("You have a royal flush!");
