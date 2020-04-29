@@ -150,5 +150,6 @@ public class Hand{
 		else if (bestHand == 10){
 			return("You have a royal flush!");
 		}
+		return "";
 	}
 }

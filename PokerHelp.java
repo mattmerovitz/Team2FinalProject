@@ -7,7 +7,7 @@ public class PokerHelp{
 	ArrayList<Card> deck;
 	Hand hand;
 
-	public void main(String[] args) throws FileNotFoundException{
+	public PokerHelp() throws FileNotFoundException{
 		Scanner filereader = new Scanner(new File ("Deck.txt"));
 		while (filereader.hasNextLine()){
 			deck.add(new Card(filereader.next(),filereader.next()));
@@ -43,9 +43,10 @@ public class PokerHelp{
 	}
 
 	public Card validateInput(Scanner input){
+		String suit = "";
 		while (true){
 			try{
-				String suit = input.next().toLowerCase();
+				suit = input.next().toLowerCase();
 			}
 			catch (InputMismatchException e){
   				System.out.println("Invalid input, please try again: ");
