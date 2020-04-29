@@ -18,7 +18,7 @@ public class Hand{
 		ArrayList<Card> sortedCard = new ArrayList<Card>();
 		Card[] values = new Card[currentHand.size()];
 		for (int i = 0; i < values.length; i++) {
-				Card mini = values[i]
+				Card mini = values[i];
         int min = values[i].num;
         int minIndex = i;
         for (int j = i+1; j < values.length; j++) {
