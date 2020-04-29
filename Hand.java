@@ -31,6 +31,7 @@ public class Hand{
 				}
 			}
 		}
+		System.out.println(pairCounter);
 		for (int i=2;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 4;
