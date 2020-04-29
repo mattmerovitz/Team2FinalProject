@@ -8,8 +8,8 @@ public class PokerHelp{
 	ArrayList<Card> deck;
 	Hand hand;
 
-	public static void main(String[] args) throws fileNotFoundException{
-		Scanner filereader = new Scanner(new File "Deck");
+	public static void main(String[] args) throws FileNotFoundException{
+		Scanner filereader = new Scanner(new File ("Deck"));
 		while (filereader.hasNextLine()){
 			deck.add(Card(filereader.next(),filereader.next()));
 		}
@@ -23,8 +23,8 @@ public class PokerHelp{
 
 	public static ArrayList<Card> informationRetriever(){
 		ArrayList<Card> cards = new ArrayList<Card>();
-		System.out.println("Welcome to our poker win percentage calculator!")
-		System.out.println("Please input all cards as 'suit' 'value' (Examples: Ace of spads ~ spade a, Six of hearts ~ heart 6, Queen of diamonds ~ diamond q");
+		System.out.println("Welcome to our poker win percentage calculator!");
+		System.out.println("Please input all cards as 'suit' 'value' (Examples: Ace of spades ~ spade a, Six of hearts ~ heart 6, Queen of diamonds ~ diamond q");
 		Scanner input = new Scanner(System.in);
 		System.out.println("Personal Card 1: ");
 		cards.add(validateInput(input));
@@ -64,16 +64,18 @@ public class PokerHelp{
 					break;
 				}
 			}
-			System.out.println("Invalid value input, please try again")
+			catch (NoSuchElementException){
+			System.out.println("Invalid value input, please try again");
+		}
 		}
 		Card card = new Card(suit,num);
 		return card;
-	} 
+	}
 
 	public static void calculator(Hand hand){
 		int handsBeaten = 0;
 		int totalHands = 0;
-		ArrayList<Card> communityCards = new ArrayList<Card>;
+		ArrayList<Card> communityCards = new ArrayList<Card>();
 		for (int i = 2; i < 7; i++){
 			communityCards.add(hand.all.get(i));
 		}
