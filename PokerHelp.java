@@ -34,12 +34,12 @@ public class PokerHelp{
 		cards.add(validateInput(input));
 		System.out.println("Community Card 5 (River): ");
 		cards.add(validateInput(input));
-    Hand hand = new Hand(cards);
+  		Hand hand = new Hand(cards);
 		System.out.println(hand.toString());
 		for (int i = 0; i < hand.all.size(); i++){
 			deck.remove(hand.all.get(i));
 		}
-    double handsBeaten = 0;
+    	double handsBeaten = 0;
 		double totalHands = 0;
 		ArrayList<Card> communityCards = new ArrayList<Card>();
 		for (int d = 2; d < 7; d++){
