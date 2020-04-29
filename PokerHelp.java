@@ -42,16 +42,20 @@ public class PokerHelp{
     double handsBeaten = 0;
 		double totalHands = 0;
 		ArrayList<Card> communityCards = new ArrayList<Card>();
-		for (int i = 2; i < 7; i++){
-			communityCards.add(hand.all.get(i));
+		for (int d = 2; d < 7; d++){
+			communityCards.add(hand.all.get(d));
 		}
 		for (int i = 0; i < deck.size(); i++){
 			for (int j = i + 1; j < deck.size(); j++){
-				ArrayList<Card> temp = communityCards;
+				ArrayList<Card> temp = new ArrayList<Card>();
+				for (int k = 0; k < communityCards.size(); k++){
+					temp.add(communityCards.get(k));
+				}
 				temp.add(deck.get(i));
 				temp.add(deck.get(j));
 				Hand opponentsHand = new Hand(temp);
 				totalHands++;
+				System.out.println(opponentsHand.bestHand);
 				if (hand.bestHand > opponentsHand.bestHand){
 					handsBeaten++;
 				}
