@@ -14,7 +14,7 @@ public class PokerHelp{
 		}
 		Hand hand = new Hand(informationRetriever());
 		hand.toString();
-		for (int i = 0; i < hand.all.length; i++){
+		for (int i = 0; i < hand.all.size(); i++){
 			deck.remove(hand.all.get(i));
 		}
 		calculator(hand);
