@@ -17,11 +17,14 @@ public class Card{
 		else if (num.equals("q")){
 			this.num = 12;
 		}
-		if (num.equals("k")){
+		else if (num.equals("k")){
 			this.num = 13;
 		}
 		else if (num.equals("a")){
 			this.num = 14;
+		}
+		else {
+			this.num = Integer.parseInt(num);
 		}
 	}
 

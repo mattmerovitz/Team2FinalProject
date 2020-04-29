@@ -27,8 +27,8 @@ public class HelpWithFolds extends PokerHelp {
 
         Card foldedCard = super.validateInput(fold);
 
-        for (int i = 0; i < deck.size(); i++) {
-          if (deck.get(i).num == foldedCard.num && deck.get(i).suit.equals(foldedCard.suit)){
+       for (int i = 0; i < deck.size(); i++) {
+           if (deck.get(i).num == foldedCard.num && deck.get(i).suit.equals(foldedCard.suit)){
             deck.remove(i);
           }
         }
