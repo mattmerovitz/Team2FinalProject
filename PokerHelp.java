@@ -33,10 +33,10 @@ public class PokerHelp{
 		System.out.println("Community Card 4 (Turn): ");
 		cards.add(validateInput(input));
 		System.out.println("Community Card 5 (River): ");
+		cards.add(validateInput(input));
 		HelpWithFolds help = new HelpWithFolds();
 		deck = help.HelpWithFolds(deck);
-		cards.add(validateInput(input));
-  	Hand hand = new Hand(cards);
+  		Hand hand = new Hand(cards);
 		System.out.println(hand.toString());
 		for (int j = 0; j < hand.all.size(); j++){
 			for (int i = 0; i < deck.size(); i++) {
@@ -66,7 +66,11 @@ public class PokerHelp{
 				}
 			}
 	  	}
-   		double winPercentage = handsBeaten*100/totalHands;
+   		double winPercentage = handsBeaten/totalHands;
+   		System.out.println("How many opponents are there? ");
+   		int numPlayers = input.nextInt();
+   		winPercentage = Math.pow(winPercentage,numPlayers);
+   		winPercentage *= 100;
 		System.out.println("Your hand beats " + handsBeaten + " out of " + totalHands + " total hands.");
 		System.out.println("Thats a win-percentage of " + winPercentage + "%.");
    }
@@ -97,8 +101,13 @@ public class PokerHelp{
 					}
 				}
 				catch (NumberFormatException nfe){
-					Card card = new Card(suit,num);
-					return card;
+					if (suit.equals("spade") || suit.equals("diamond") || suit.equals("heart") || suit.equals("club")){
+							Card card = new Card(suit,num);
+							return card;
+					}
+					else{
+							System.out.println("Invalid input, please try again: ");
+					}
 				}
 			}
 			catch (InputMismatchException e){
