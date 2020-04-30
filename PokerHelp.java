@@ -54,7 +54,11 @@ public class PokerHelp{
 				}
 			}
 	  	}
-   		double winPercentage = handsBeaten*100/totalHands;
+   		double winPercentage = handsBeaten/totalHands;
+   		System.out.println("How many opponents are there? ");
+   		int numPlayers = input.nextInt();
+   		winPercentage = Math.pow(winPercentage,numPlayers);
+   		winPercentage *= 100;
 		System.out.println("Your hand beats " + handsBeaten + " out of " + totalHands + " total hands.");
 		System.out.println("Thats a win-percentage of " + winPercentage + "%.");
    }
@@ -85,8 +89,13 @@ public class PokerHelp{
 					}
 				}
 				catch (NumberFormatException nfe){
-					Card card = new Card(suit,num);
-					return card;
+					if (suit.equals("spade") || suit.equals("diamond") || suit.equals("heart") || suit.equals("club")){
+							Card card = new Card(suit,num);
+							return card;
+					}
+					else{
+							System.out.println("Invalid input, please try again: ");
+					}
 				}
 			}
 			catch (InputMismatchException e){
