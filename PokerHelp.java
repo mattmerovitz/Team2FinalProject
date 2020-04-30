@@ -17,8 +17,8 @@ public class PokerHelp{
     }
 
     ArrayList<Card> cards = new ArrayList<Card>();
-		System.out.println("Welcome to our poker win percentage calculator!");
-		System.out.println("Please input all cards as 'suit' 'value' (Examples: Ace of spades ~ spade a, Six of hearts ~ heart 6, Queen of diamonds ~ diamond q");
+		System.out.println("\nWelcome to our poker win percentage calculator!\n");
+		System.out.println("Please input all cards as 'suit' 'value' (Examples: Ace of spades ~ spade a, Six of hearts ~ heart 6, Queen of diamonds ~ diamond q\n");
 		Scanner input = new Scanner(System.in);
 		Game game = new Game();
 		cards = game.Game(deck, cards);
@@ -60,7 +60,7 @@ public class PokerHelp{
    		winPercentage = Math.pow(winPercentage,numPlayers);
    		winPercentage *= 100;
 		System.out.println("Your hand beats " + handsBeaten + " out of " + totalHands + " total hands.");
-		System.out.println("Thats a win-percentage of " + winPercentage + "%.");
+		System.out.println("That's a win-percentage of " + winPercentage + "%.");
    }
 	public static Card validateInput(Scanner input){
 		String suit = "";
