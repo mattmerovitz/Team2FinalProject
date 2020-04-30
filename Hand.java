@@ -21,6 +21,8 @@ public class Hand{
 		ArrayList<Card> diamond = new ArrayList<Card>();
 		ArrayList<Card> spade = new ArrayList<Card>();
 		Card[] values = new Card[currentHand.size()];
+
+		//sorts cards
 		for (int i=0; i<values.length; i++){
 			values[i] = currentHand.get(i);
 		}
@@ -28,11 +30,15 @@ public class Hand{
 		for (int i=0; i<sortedCard.size(); i++){
 			straight.add(sortedCard.get(i));
 		}
+
+		//three of a kind
 		for (int i=2;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 4;
 			}
 		}
+
+		//full house
 		if (bestHand == 4){
 			for (int i=1;i<sortedCard.size(); i++){
 				if (sortedCard.get(i-1).num == sortedCard.get(i).num){
@@ -43,6 +49,8 @@ public class Hand{
 				}
 			}
 		}
+
+		//pair
 		pairCounter = 0;
 		for (int i=1;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-1).num == sortedCard.get(i).num && bestHand == 1){
@@ -56,6 +64,7 @@ public class Hand{
 			bestHand = 2;
 		}
 
+		//four of a kind
 		for (int i=3;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-3).num == sortedCard.get(i-2).num &&
 			sortedCard.get(i-2).num == sortedCard.get(i-1).num &&
@@ -64,12 +73,14 @@ public class Hand{
 			}
 		}
 
+		//makes straight ArrayList
 		for (int i=1;i<straight.size(); i++){
 			if (straight.get(i-1).num == straight.get(i).num){
 				straight.remove(i);
 			}
 		}
 
+		//categorize cards by suit
 		for (int i=0;i<sortedCard.size(); i++){
 			if (sortedCard.get(i).suit.equals("heart")){
 				heart.add(sortedCard.get(i));
@@ -85,6 +96,7 @@ public class Hand{
 			}
 		}
 
+		//straight
 		for (int i=4;i<straight.size(); i++){
 			if (straight.get(i-4).num + 4 == straight.get(i-3).num + 3 &&
 					straight.get(i-3).num + 3 == straight.get(i-2).num + 2 &&
@@ -94,10 +106,12 @@ public class Hand{
 			}
 		}
 
+		//flush
 		if (heart.size() > 4 || club.size() > 4 || diamond.size() > 4 || spade.size() > 4){
 			bestHand = 6;
 		}
 
+		//straight flush
 		if (heart.size() > 4) {
 			for (int i=4;i<heart.size(); i++){
 				if (heart.get(i-4).num + 4 == heart.get(i-3).num + 3 &&
@@ -143,7 +157,7 @@ public class Hand{
 				}
 			}
 
-
+		//royal flush
 		if (royalChecker == 14){
 			bestHand = 10;
 		}
