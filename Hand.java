@@ -3,8 +3,8 @@ import java.io.*;
 
 
 public class Hand{
-	ArrayList<Card> all;
-	int bestHand;
+	ArrayList<Card> all;//player's personal and community cards
+	int bestHand;//ranking of player's best hand (1 = high card, 2 = pair...)
 
 	public Hand(ArrayList<Card> hand){
 		all = hand;
