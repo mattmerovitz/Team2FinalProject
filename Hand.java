@@ -33,6 +33,7 @@ public class Hand{
 		for (int i=0; i<sortedCard.size(); i++){
 			straight.add(sortedCard.get(i));//makes the ArrayList for the straight
 		}
+		secondaryIndex = sortedCard.get(sortedCard.size()-1).num;
 
 		//three of a kind
 		for (int i=2;i<sortedCard.size(); i++){
