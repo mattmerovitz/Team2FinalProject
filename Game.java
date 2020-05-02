@@ -10,22 +10,22 @@ public class Game extends PokerHelp {
     System.out.println("Would you like to play game mode (random hand) or would you like to manually input your hand? \n(type \"y\" for game mode, type anything else for manual.)");
     String gameMode = input.nextLine();
 
-    if (!gameMode.toLowerCase().equals("y")){
+    if (!gameMode.toLowerCase().equals("y")){//if statement checks if opponent wants to play random or non random game mode
 
       System.out.println("Personal Card 1: ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 		  System.out.println("Personal Card 2: ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 		  System.out.println("Community Card 1 (Flop 1): ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 		  System.out.println("Community Card 2 (Flop 2): ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 		  System.out.println("Community Card 3 (Flop 3): ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 		  System.out.println("Community Card 4 (Turn): ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 		  System.out.println("Community Card 5 (River): ");
-		  cards.add(validateInput(input));
+		  cards.add(validateInput(input,cards));
 
     }
 
@@ -33,10 +33,9 @@ public class Game extends PokerHelp {
 
       for (int i=0; i < 7; i++){
 
-        int randIndex = random.nextInt(deck.size());
-        cards.add(deck.get(randIndex));
-        deck.remove(randIndex);
-        
+        int randIndex = random.nextInt(deck.size());//random index is assigned to int randIndex
+        cards.add(deck.get(randIndex));//card in randIndex of deck is added to the cards ArrayList
+        deck.remove(randIndex);//card in randIndex of deck is removed from the deck
       }
 
       for (int i=0; i < 2; i++){
