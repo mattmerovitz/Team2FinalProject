@@ -12,6 +12,8 @@ public class Hand{
 		bestHand = bestHandfinder(all);
 	}
 	public int bestHandfinder(ArrayList<Card> currentHand){
+
+		//lines 17-26 initialize some variables
 		bestHand = 1;
 		int pairCounter = 0;
 		int royalChecker = 0;
@@ -23,29 +25,29 @@ public class Hand{
 		ArrayList<Card> spade = new ArrayList<Card>();
 		Card[] values = new Card[currentHand.size()];
 
-		//sorts cards
+		//sorts the cards by number
 		for (int i=0; i<values.length; i++){
-			values[i] = currentHand.get(i);
+			values[i] = currentHand.get(i);//sends the hand to a normal array
 		}
-		sortedCard = sort(values);
+		sortedCard = sort(values);//sorts the cards by number and returns them as an ArrayList
 		for (int i=0; i<sortedCard.size(); i++){
-			straight.add(sortedCard.get(i));
+			straight.add(sortedCard.get(i));//makes the ArrayList for the straight
 		}
 
 		//three of a kind
 		for (int i=2;i<sortedCard.size(); i++){
-			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
-				bestHand = 4;
-				secondaryIndex = sortedCard.get(i).num;
+			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){//if there are three equal cards in a row
+				bestHand = 4;//sets best hand to three of a kind
+				secondaryIndex = sortedCard.get(i).num;//sets the secondary index to the number of the three of a kind
 			}
 		}
 
 		//full house
-		if (bestHand == 4){
+		if (bestHand == 4){//if three of a kind
 			for (int i=1;i<sortedCard.size(); i++){
-				if (sortedCard.get(i-1).num == sortedCard.get(i).num){
+				if (sortedCard.get(i-1).num == sortedCard.get(i).num){//if also a pair
 					pairCounter++;
-					if (pairCounter > 2){
+					if (pairCounter > 2){//sets full house
 						bestHand = 7;
 					}
 				}
@@ -53,16 +55,16 @@ public class Hand{
 		}
 
 		//two pair
-		pairCounter = 0;
-		ArrayList<Integer> highestPair = new ArrayList<Integer>();
-		int highPair = 0;
+		pairCounter = 0;//resets the pair counter to ensure no overlap
+		ArrayList<Integer> highestPair = new ArrayList<Integer>();//makes an ArrayList of the numbers in the pairs
+		int highPair = 0;//sets the value of the highet pair
 		for (int i=1;i<sortedCard.size(); i++){
-			if (sortedCard.get(i-1).num == sortedCard.get(i).num && bestHand == 1){
-				pairCounter++;
-				highestPair.add(sortedCard.get(i).num);
-				secondaryIndex = sortedCard.get(i).num;
+			if (sortedCard.get(i-1).num == sortedCard.get(i).num && bestHand == 1){//if pair
+				pairCounter++;//counts numbers of pairs
+				highestPair.add(sortedCard.get(i).num);//adds to the highestPair ArrayList
+				secondaryIndex = sortedCard.get(i).num;//sets the secondaryIndex
 				if (pairCounter > 1){
-					bestHand = 3;
+					bestHand = 3;//sets two pair
 				}
 			}
 		}
@@ -70,8 +72,8 @@ public class Hand{
 		//checks highest of the two pairs
 		if (bestHand == 3){
 			for (int i=0; i<highestPair.size(); i++){
-				if (highestPair.get(i) > highPair){
-					secondaryIndex = highestPair.get(i);
+				if (highestPair.get(i) > highPair){//if it is the highest pair
+					secondaryIndex = highestPair.get(i);//change the value of the highest pair
 					highPair = secondaryIndex;
 				}
 			}
@@ -79,28 +81,30 @@ public class Hand{
 
 		//pair
 		if (pairCounter == 1){
-			bestHand = 2;
+			bestHand = 2;//sets pair if cards is 1
 		}
 
 		//four of a kind
 		for (int i=3;i<sortedCard.size(); i++){
+			//if four cards of the same value in a row
 			if (sortedCard.get(i-3).num == sortedCard.get(i-2).num &&
 			sortedCard.get(i-2).num == sortedCard.get(i-1).num &&
 			sortedCard.get(i-1).num == sortedCard.get(i).num){
-				bestHand = 8;
-				secondaryIndex = sortedCard.get(i).num;
+				bestHand = 8;//sets four of a kind
+				secondaryIndex = sortedCard.get(i).num;//sets secondaryIndex
 			}
 		}
 
 		//makes straight ArrayList
 		for (int i=1;i<straight.size(); i++){
-			if (straight.get(i-1).num == straight.get(i).num){
+			if (straight.get(i-1).num == straight.get(i).num){//removes value if two of the same card numbers are in the hand
 				straight.remove(i);
 			}
 		}
 
 		//categorize cards by suit
 		for (int i=0;i<sortedCard.size(); i++){
+			//four ArrayLists; each card is categorized by suit
 			if (sortedCard.get(i).suit.equals("heart")){
 				heart.add(sortedCard.get(i));
 			}
@@ -117,18 +121,20 @@ public class Hand{
 
 		//straight
 		for (int i=4;i<straight.size(); i++){
+			//if there are 5 cards in a row in the hand
 			if (straight.get(i-4).num + 4 == straight.get(i-3).num + 3 &&
 					straight.get(i-3).num + 3 == straight.get(i-2).num + 2 &&
 					straight.get(i-2).num + 2 == straight.get(i-1).num + 1 &&
 					straight.get(i-1).num + 1 == straight.get(i).num) {
-				bestHand = 5;
-				secondaryIndex = sortedCard.get(i).num;
+				bestHand = 5;//sets best hand to straight
+				secondaryIndex = sortedCard.get(i).num;//sets secondaryIndex to the highest card of the straight
 			}
 		}
 
 		int highest = 0;
 
 		//flush
+		//lines 138-173 check to see if there are 5+ cards in a single suit
 		if (heart.size() > 4) {
 			bestHand = 6;
 			for (int i=0; i<heart.size(); i++){
@@ -167,6 +173,7 @@ public class Hand{
 		}
 
 		//straight flush
+		//lines 177-224 check to see if the flushed cards are also a straight and sets the secondaryIndex to the highest card of the straight
 		if (heart.size() > 4) {
 			for (int i=4;i<heart.size(); i++){
 				if (heart.get(i-4).num + 4 == heart.get(i-3).num + 3 &&
@@ -218,13 +225,17 @@ public class Hand{
 
 		//royal flush
 		if (royalChecker == 14){
-			bestHand = 10;
+			bestHand = 10;//sets best hand to royal flush if there is a straight flush and the highest card of the straight flush is an ace
 		}
 
 		return bestHand;
 
 	}
 	public String toString(){
+		/*
+		*
+		***lines 239-270 return the string message regarding the best hand the user has.
+		*/
 		if (bestHand == 1){
 			return("You have a high card!");
 		}
@@ -259,11 +270,11 @@ public class Hand{
 	}
 
 	public ArrayList<Card> sort(Card[] values){
-		ArrayList<Card> sortedCard = new ArrayList<Card>();
-		Card temporary = values[0];
+		ArrayList<Card> sortedCard = new ArrayList<Card>();//ArrayList of the sorted cards
+		Card temporary = values[0];//sets the temp card to the first card of the array
 		for (int i = 1; i < 7; i++) {
       for (int j = i; j > 0; j--) {
-        if (values[j].num < values[j-1].num) {
+        if (values[j].num < values[j-1].num) {//checks to see if the current value is higher than the next value
 					temporary = values[j];
           values[j] = values[j-1];
 					values[j-1] = temporary;
@@ -271,8 +282,8 @@ public class Hand{
       }
     }
 		for (int i=0; i<7; i++) {
-			sortedCard.add(values[i]);
+			sortedCard.add(values[i]);//makes the sorted cards to an ArrayList
 		}
-		return sortedCard;
+		return sortedCard;//returns the ArrayList
 	}
 }

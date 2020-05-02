@@ -40,6 +40,7 @@ public class Game extends PokerHelp {
       for (int i=0; i < 2; i++){
         int k = i+1;
         String indexToPrint = Integer.toString(k);
+        //lines 44-73 prints out the random personal cards
         if (cards.get(i).num <= 10){
 
           System.out.println("Personal card " + indexToPrint + ": " + cards.get(i).suit + " " + cards.get(i).num);
@@ -74,6 +75,7 @@ public class Game extends PokerHelp {
       for (int i=2; i < 7; i++){
         int j = i-1;
         String indexToPrint = Integer.toString(j);
+        //lines 44-73 prints out the random community cards
         if (cards.get(i).num <= 10){
 
           System.out.println("Community card " + indexToPrint + ": " + cards.get(i).suit + " " + cards.get(i).num);
@@ -107,7 +109,7 @@ public class Game extends PokerHelp {
 
     }
 
-    return cards;
+    return cards;//returns the cards ArrayList
 
   }
 
