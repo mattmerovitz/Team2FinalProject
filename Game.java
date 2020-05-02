@@ -37,7 +37,6 @@ public class Game extends PokerHelp {
         cards.add(deck.get(randIndex));//card in randIndex of deck is added to the cards ArrayList
         deck.remove(randIndex);//card in randIndex of deck is removed from the deck
       }
-      System.out.println(cards.size());
       for (int i=0; i < 2; i++){
         int k = i+1;
         String indexToPrint = Integer.toString(k);
