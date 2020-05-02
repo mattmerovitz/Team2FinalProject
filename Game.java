@@ -36,6 +36,7 @@ public class Game extends PokerHelp {
         int randIndex = random.nextInt(deck.size());
         cards.add(deck.get(randIndex));
         deck.remove(randIndex);
+        
       }
 
       for (int i=0; i < 2; i++){
