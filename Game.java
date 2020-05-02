@@ -11,7 +11,7 @@ public class Game extends PokerHelp {
     String gameMode = input.nextLine();
 
     if (!gameMode.toLowerCase().equals("y")){//if statement checks if opponent wants to play random or non random game mode
-
+      //lines 15-28 ask for each card then validate that it was inputted properly
       System.out.println("Personal Card 1: ");
 		  cards.add(validateInput(input,cards));
 		  System.out.println("Personal Card 2: ");
