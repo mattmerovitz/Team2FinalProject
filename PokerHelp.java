@@ -51,6 +51,9 @@ public class PokerHelp{
 				if (hand.bestHand > opponentsHand.bestHand){//if statement looks for cases where user's bestHand is better than opponents bestHand
 					handsBeaten++;
 				}
+				else if (hand.bestHand == opponentsHand.bestHand && hand.secondaryIndex > opponentsHand.secondaryIndex){
+					handsBeaten++;
+				}
 			}
 	  	}
    		double winPercentage = handsBeaten/totalHands;
