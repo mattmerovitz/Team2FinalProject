@@ -61,7 +61,6 @@ public class Hand{
 				pairCounter++;
 				highestPair.add(sortedCard.get(i).num);
 				secondaryIndex = sortedCard.get(i).num;
-				System.out.println(pairCounter);
 				if (pairCounter > 1){
 					bestHand = 3;
 				}
@@ -77,7 +76,7 @@ public class Hand{
 				}
 			}
 		}
-		
+
 		//pair
 		if (pairCounter == 1){
 			bestHand = 2;
