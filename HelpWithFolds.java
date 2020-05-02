@@ -2,10 +2,11 @@ import java.util.*;
 
 public class HelpWithFolds extends PokerHelp {
 
-  public ArrayList<Card> HelpWithFolds (ArrayList<Card> deck){
+  public ArrayList<Card> HelpWithFolds (ArrayList<Card> deck, ArrayList<Card> cards){
 
     Scanner fold = new Scanner(System.in);
     Scanner in = new Scanner(System.in);
+
 
     int counter = 0;
     String userInput = "";
@@ -25,7 +26,7 @@ public class HelpWithFolds extends PokerHelp {
 
         System.out.print("Folded card " + counter + ": ");
 
-        Card foldedCard = super.validateInput(fold);
+        Card foldedCard = super.validateInput(fold, cards);
 
        for (int i = 0; i < deck.size(); i++) {
            if (deck.get(i).num == foldedCard.num && deck.get(i).suit.equals(foldedCard.suit)){

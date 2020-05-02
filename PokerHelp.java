@@ -22,7 +22,7 @@ public class PokerHelp{
 		Game game = new Game();//Game object initialised
 		cards = game.Game(deck, cards);//Game object returns user's personal and community cards
 		HelpWithFolds help = new HelpWithFolds();//HelpWithFolds object initialised
-		deck = help.HelpWithFolds(deck);//deck is changed based on folded cards
+		deck = help.HelpWithFolds(deck, cards);//deck is changed based on folded cards
   		Hand hand = new Hand(cards);//Hand object initialised for user's cards
 		System.out.println(hand.toString());
 		for (int j = 0; j < hand.all.size(); j++){//for loop iterates through user's cards

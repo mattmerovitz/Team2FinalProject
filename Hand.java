@@ -5,7 +5,7 @@ import java.io.*;
 public class Hand{
 	ArrayList<Card> all;//player's personal and community cards
 	int bestHand;//ranking of player's best hand (1 = high card, 2 = pair...)
-	int secondaryIndex;//seconday ranking for cases of two Hands with the same bestHands
+	int secondaryIndex;//secondary ranking for cases of two Hands with the same bestHands
 
 	public Hand(ArrayList<Card> hand){
 		all = hand;
@@ -36,6 +36,7 @@ public class Hand{
 		for (int i=2;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-2).num == sortedCard.get(i-1).num && sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 4;
+				secondaryIndex = sortedCard.get(i).num;
 			}
 		}
 
@@ -51,16 +52,33 @@ public class Hand{
 			}
 		}
 
-		//pair
+		//two pair
 		pairCounter = 0;
+		ArrayList<Integer> highestPair = new ArrayList<Integer>();
+		int highPair = 0;
 		for (int i=1;i<sortedCard.size(); i++){
 			if (sortedCard.get(i-1).num == sortedCard.get(i).num && bestHand == 1){
 				pairCounter++;
+				highestPair.add(sortedCard.get(i).num);
+				secondaryIndex = sortedCard.get(i).num;
+				System.out.println(pairCounter);
 				if (pairCounter > 1){
 					bestHand = 3;
 				}
 			}
 		}
+
+		//checks highest of the two pairs
+		if (bestHand == 3){
+			for (int i=0; i<highestPair.size(); i++){
+				if (highestPair.get(i) > highPair){
+					secondaryIndex = highestPair.get(i);
+					highPair = secondaryIndex;
+				}
+			}
+		}
+		
+		//pair
 		if (pairCounter == 1){
 			bestHand = 2;
 		}
@@ -71,6 +89,7 @@ public class Hand{
 			sortedCard.get(i-2).num == sortedCard.get(i-1).num &&
 			sortedCard.get(i-1).num == sortedCard.get(i).num){
 				bestHand = 8;
+				secondaryIndex = sortedCard.get(i).num;
 			}
 		}
 
@@ -104,12 +123,48 @@ public class Hand{
 					straight.get(i-2).num + 2 == straight.get(i-1).num + 1 &&
 					straight.get(i-1).num + 1 == straight.get(i).num) {
 				bestHand = 5;
+				secondaryIndex = sortedCard.get(i).num;
 			}
 		}
 
+		int highest = 0;
+
 		//flush
-		if (heart.size() > 4 || club.size() > 4 || diamond.size() > 4 || spade.size() > 4){
+		if (heart.size() > 4) {
 			bestHand = 6;
+			for (int i=0; i<heart.size(); i++){
+				if (i > pairCounter){
+					secondaryIndex = heart.get(i).num;
+					pairCounter = i;
+				}
+			}
+		}
+		else if (club.size() > 4) {
+			bestHand = 6;
+			for (int i=0; i<club.size(); i++){
+				if (i > pairCounter){
+					secondaryIndex = club.get(i).num;
+					pairCounter = i;
+				}
+			}
+		}
+		else if (diamond.size() > 4) {
+			bestHand = 6;
+			for (int i=0; i<diamond.size(); i++){
+				if (i > pairCounter){
+					secondaryIndex = diamond.get(i).num;
+					pairCounter = i;
+				}
+			}
+		}
+		else if (spade.size() > 4) {
+			bestHand = 6;
+			for (int i=0; i<spade.size(); i++){
+				if (i > pairCounter){
+					secondaryIndex = spade.get(i).num;
+					pairCounter = i;
+				}
+			}
 		}
 
 		//straight flush
@@ -120,6 +175,7 @@ public class Hand{
 					heart.get(i-2).num + 2 == heart.get(i-1).num + 1 &&
 					heart.get(i-1).num + 1 == heart.get(i).num){
 						bestHand = 9;
+						secondaryIndex = sortedCard.get(i).num;
 						royalChecker = heart.get(i).num;
 					}
 				}
@@ -131,6 +187,7 @@ public class Hand{
 					club.get(i-2).num + 2 == club.get(i-1).num + 1 &&
 					club.get(i-1).num + 1 == club.get(i).num){
 						bestHand = 9;
+						secondaryIndex = sortedCard.get(i).num;
 						royalChecker = club.get(i).num;
 					}
 				}
@@ -142,6 +199,7 @@ public class Hand{
 					diamond.get(i-2).num + 2 == diamond.get(i-1).num + 1 &&
 					diamond.get(i-1).num + 1 == diamond.get(i).num){
 						bestHand = 9;
+						secondaryIndex = sortedCard.get(i).num;
 						royalChecker = diamond.get(i).num;
 					}
 				}
@@ -153,6 +211,7 @@ public class Hand{
 					spade.get(i-2).num + 2 == spade.get(i-1).num + 1 &&
 					spade.get(i-1).num + 1 == spade.get(i).num){
 						bestHand = 9;
+						secondaryIndex = sortedCard.get(i).num;
 						royalChecker = spade.get(i).num;
 					}
 				}

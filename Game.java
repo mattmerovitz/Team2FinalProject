@@ -37,71 +37,72 @@ public class Game extends PokerHelp {
         cards.add(deck.get(randIndex));//card in randIndex of deck is added to the cards ArrayList
         deck.remove(randIndex);//card in randIndex of deck is removed from the deck
       }
-
+      System.out.println(cards.size());
       for (int i=0; i < 2; i++){
+        int k = i+1;
+        String indexToPrint = Integer.toString(k);
+        if (cards.get(i).num <= 10){
 
-        if (cards.get(i).num < 10){
-
-          System.out.println("Personal card " + (i + 1) + ": " + cards.get(i).suit + " " + cards.get(i).num);
+          System.out.println("Personal card " + indexToPrint + ": " + cards.get(i).suit + " " + cards.get(i).num);
 
         }
 
         else if (cards.get(i).num == 11){
 
-    			System.out.println("Personal card " + (i + 1) + ": " + cards.get(i).suit + " j");
+    			System.out.println("Personal card " + indexToPrint + ": " + cards.get(i).suit + " j");
 
     		}
     		else if (cards.get(i).num == 12){
 
-    			System.out.println("Personal card " + (i + 1) + ": " + cards.get(i).suit + " q");
+    			System.out.println("Personal card " + indexToPrint + ": " + cards.get(i).suit + " q");
 
     		}
 
     		else if (cards.get(i).num == 13){
 
-    			System.out.println("Personal card " + (i + 1) + ": " + cards.get(i).suit + " k");
+    			System.out.println("Personal card " + indexToPrint + ": " + cards.get(i).suit + " k");
 
     		}
 
     		else if (cards.get(i).num == 14){
 
-    			System.out.println("Personal card " + (i + 1) + ": " + cards.get(i).suit + " a");
+    			System.out.println("Personal card " + indexToPrint + ": " + cards.get(i).suit + " a");
 
     		}
 
       }
 
       for (int i=2; i < 7; i++){
+        int j = i-1;
+        String indexToPrint = Integer.toString(j);
+        if (cards.get(i).num <= 10){
 
-        if (cards.get(i).num < 10){
-
-          System.out.println("Community card " + (i - 1) + ": " + cards.get(i).suit + " " + cards.get(i).num);
+          System.out.println("Community card " + indexToPrint + ": " + cards.get(i).suit + " " + cards.get(i).num);
 
         }
 
         else if (cards.get(i).num == 11){
 
-    			System.out.println("Community card " + (i + 1) + ": " + cards.get(i).suit + " j");
+    			System.out.println("Community card " + indexToPrint + ": " + cards.get(i).suit + " j");
 
     		}
     		else if (cards.get(i).num == 12){
 
-    			System.out.println("Community card " + (i + 1) + ": " + cards.get(i).suit + " q");
+    			System.out.println("Community card " + indexToPrint + ": " + cards.get(i).suit + " q");
 
     		}
 
     		else if (cards.get(i).num == 13){
 
-    			System.out.println("Community card " + (i + 1) + ": " + cards.get(i).suit + " k");
+    			System.out.println("Community card " + indexToPrint + ": " + cards.get(i).suit + " k");
 
     		}
 
     		else if (cards.get(i).num == 14){
 
-    			System.out.println("Community card " + (i + 1) + ": " + cards.get(i).suit + " a");
+    			System.out.println("Community card " + indexToPrint + ": " + cards.get(i).suit + " a");
 
     		}
-
 
       }
 
