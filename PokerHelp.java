@@ -4,6 +4,7 @@ import java.io.*;
 public class PokerHelp{
 
 	public static void main(String[] args) throws FileNotFoundException{
+		//creating the deck
     	File deckFile = new File("Deck.txt");
 		Scanner filereader = new Scanner(deckFile);//new scanner created to read the deck file
 		ArrayList<Card> deck = new ArrayList<Card>();//initialises an ArrayList of type Card to act as a deck
@@ -15,6 +16,8 @@ public class PokerHelp{
    		else{
     		System.out.print("This file does not exist");
     	}
+
+    	//initialising the game
 		ArrayList<Card> cards = new ArrayList<Card>();//initianlises an ArrayList of type Card to store the user's personal and community cards
 		System.out.println("\nWelcome to our poker win percentage calculator!\n");
 		System.out.println("Please input all cards as 'suit' 'value' (Examples: Ace of spades ~ spade a, Six of hearts ~ heart 6, Queen of diamonds ~ diamond q\n");
@@ -25,6 +28,8 @@ public class PokerHelp{
 		deck = help.HelpWithFolds(deck, cards);//deck is changed based on folded cards
   		Hand hand = new Hand(cards);//Hand object initialised for user's cards
 		System.out.println(hand.toString());
+
+		//running simulations all possible combinations for the opponents hand
 		for (int j = 0; j < hand.all.size(); j++){//for loop iterates through user's cards
 			for (int i = 0; i < deck.size(); i++) {//for loop iterates through the deck
 				if (deck.get(i).num == hand.all.get(j).num && deck.get(i).suit.equals(hand.all.get(j).suit)){//if statement looks for identical cards (same suit, same value)
@@ -62,7 +67,7 @@ public class PokerHelp{
    		winPercentage = Math.pow(winPercentage,numPlayers);//accounts for multiple opponents drawing cards
    		winPercentage *= 100;
 		System.out.println("Your hand beats " + handsBeaten + " out of " + totalHands + " total hands.");
-		System.out.println("That's a win-percentage of " + winPercentage + "%.");
+		System.out.println("Your odds of winning the WHOLE pot are " + winPercentage + "%.");
 	}
 
 	public static Card validateInput(Scanner input, ArrayList<Card> cards){
